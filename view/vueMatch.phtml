@@ -1,0 +1,82 @@
+
+    <main class="container">
+        <h1>Match
+            <h2 class="text-center">Liste de match</h2>
+            <table class="table table-success table-striped">
+                <tr class="table-dark">
+                    <th>ID de rencontre</th>
+                    <th>Lieu</th>
+                    <th>Type</th>
+                    <th>ID de équipe a</th>
+                    <th>ID de équipe b</th>
+                    <th>date de rencontre</th>
+                    <th></th>
+
+                </tr>
+
+                <?php foreach($matchs as $match): ?>
+   
+                    <tr>
+                        <td><?php echo $match['id_rencontre']; ?> </td>
+                        <td><?php echo $match['lieu']; ?> </td>
+                        <td><?php echo $match['type']; ?> </td>
+                        <td><?php echo $match['id_equipe_a']; ?> </td>
+                        <td><?php echo $match['id_equipe_b']; ?> </td>
+                        <td><?php echo $match['date_rencontre']; ?> </td>
+
+                        <!-- <a>：这是 HTML 中的锚元素，用于创建超链接。href 属性指定了链接的目标地址。
+                            通过 ? 后面的参数，传递了两个参数给当前页面，一个是操作（action=update），另一个是队伍 ID（id_equipe）。
+                            ?= $equipe['id_equipe']：这是 PHP 中的短标签，用于输出 $equipe 数组中的 id_equipe 的值作为链接中的参数。
+                            这可能是一个数据库中队伍的唯一标识符，用于指定要更新或删除的特定队伍。
+                            "UP" 和 "Del"：这是链接文本，即用户在页面上看到的文本。
+                            在这里，"UP" 表示更新（或"上移"）操作，而 "Del" 表示删除（或"删除"）操作 
+                            ?? "" 部分是空合并运算符，用于提供默认值，确保即使 $agenceUp['id_agence'] 未定义，也不会引发错误。
+                            如果 $agenceUp['id_agence'] 有值，就将其作为隐藏字段的值；否则，使用空字符串作为默认值。
+                            $agenceUp['id_agence'] 是一个 PHP 变量，用于存储机构的唯一标识符-->
+                        <td>
+                         <a href="?action=update&id_rencontre=<?= $match['id_rencontre']; ?>">UP</a>
+                         <a href="?action=delete&id_rencontre=<?= $match['id_rencontre']; ?>">Del</a>
+                        </td>
+                    </tr>
+
+                <?php endforeach; ?>
+
+            </table>
+
+        <form action="" method="post" class="container">
+            <h2>Ajouer une match</h2>
+            <div>
+               <label for="idRencontre"></label>
+               <input type="hidden" id="idRencontre" name="idRencontre" value="<?=$matchUp['id_rencontre'] ?? "";?>">
+            </div>
+
+            <div>
+               <label for="lieu">Lieu</label>
+               <input type="text" id="lieu" name="lieu" value="<?=$matchUp['lieu'] ?? "";?>">
+            </div>
+            <div>
+               <label for="type"></label>
+               <input type="hidden" id="type" name="type" value="<?=$matchUp['type'] ?? "";?>">
+            </div>
+            <div>
+               <label for="idEquipeA"></label>
+               <input type="hidden" id="idEquipeA" name="idEquipeA" value="<?=$matchUp['id_equipe_a'] ?? "";?>">
+            </div>
+            <div>
+               <label for="idEquipeB"></label>
+               <input type="hidden" id="idEquipeB" name="idEquipeB" value="<?=$matchUp['id_equipe_b'] ?? "";?>">
+            </div>
+
+
+            <div>
+               <label for="dateRencontre">Date de rencontre</label>
+               <input type="text" id="dateRencontre" name="dateRencontre" value="<?=$matchUp['date_rencontre'] ?? "";?>">
+            </div>
+            <button type="submit" name="submit">Submit</button>
+
+        </form>
+
+
+    </main>
+
+</html>

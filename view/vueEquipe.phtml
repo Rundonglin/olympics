@@ -1,0 +1,58 @@
+    <main class="container">
+        <h1>Equipe
+            <h2 class="text-center">Liste de équipe</h2>
+            <table class="table table-success table-striped">
+                <tr class="table-dark">
+                    <th>ID de équipe</th>
+                    <th>Nom de équipe</th>
+                    <th></th>
+
+                </tr>
+
+                <?php foreach($equipes as $equipe): ?>
+   
+                    <tr>
+                        <td><?php echo $equipe['id_equipe']; ?> </td>
+                        <td>
+                            <a href="detailEquipe.php?id=<?php echo $equipe['nom_equipe']?>"><?php echo $equipe['nom_equipe']?></a>
+                        </td>
+
+                        <td>
+                        <!-- <a>：这是 HTML 中的锚元素，用于创建超链接。href 属性指定了链接的目标地址。
+                            通过 ? 后面的参数，传递了两个参数给当前页面，一个是操作（action=update），另一个是队伍 ID（id_equipe）。
+                            ?= $equipe['id_equipe']：这是 PHP 中的短标签，用于输出 $equipe 数组中的 id_equipe 的值作为链接中的参数。
+                            这可能是一个数据库中队伍的唯一标识符，用于指定要更新或删除的特定队伍。
+                            "UP" 和 "Del"：这是链接文本，即用户在页面上看到的文本。
+                            在这里，"UP" 表示更新（或"上移"）操作，而 "Del" 表示删除（或"删除"）操作 
+                            ?? "" 部分是空合并运算符，用于提供默认值，确保即使 $agenceUp['id_agence'] 未定义，也不会引发错误。
+                            如果 $agenceUp['id_agence'] 有值，就将其作为隐藏字段的值；否则，使用空字符串作为默认值。
+                            $agenceUp['id_agence'] 是一个 PHP 变量，用于存储机构的唯一标识符-->
+                        
+                         <a href="?action=update&id_equipe=<?= $equipe['id_equipe']; ?>">UP</a>
+                         <a href="?action=delete&id_equipe=<?= $equipe['id_equipe']; ?>">Del</a>
+                        </td>
+                    </tr>
+
+                <?php endforeach; ?>
+
+            </table>
+
+   
+     <form action="" method="post" class="container">
+     <h2>Ajouer une équipe</h2>
+          <div>
+          
+               <label for="idEquipe"></label>
+               <input type="hidden" id="idEquipe" name="idEquipe" value="<?=$equipeUp['id_equipe'] ?? "";?>">
+          </div>
+
+          <div>
+               <label for="nomEquipe">Nom de équipe</label>
+               <input type="text" id="nomEquipe" name="nomEquipe" value="<?=$equipeUp['nom_equipe'] ?? "";?>">
+          </div>
+          <button type="submit" name="submit">Submit</button>
+
+
+     </form>
+
+    </main>
