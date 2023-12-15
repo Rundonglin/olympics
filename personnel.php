@@ -2,14 +2,51 @@
 
 include 'inc/fonction.php';
 
+//预处理
 $requete = $pdo->prepare("SELECT * FROM personnel");
 $requete->execute();
 $personnels = $requete->fetchAll();
 
 
+//搜索参数
+$conditions = [];
+$params = [];
 
-// INSERTION
-// Determine if a variable is declared and is different than NULL isset( mixed $var [, mixed $... ]): bool
+
+//搜索国家
+if (isset($_GET['nom_equipe']) && $_GET['nom_equipe'] != '') {
+    $conditions[] = "id_equipe = ?";
+    $params[] = $_GET['nom_equipe'];
+}
+
+//搜索角色
+if (isset($_GET['role']) && $_GET['role'] != '') {
+    $conditions[] = "role = ?";
+    $params[] = $_GET['role'];
+}
+
+// 根据筛选条件构建SQL查询
+if (count($conditions) > 0) {
+    $sqlConditions = ' WHERE ' . implode(' AND ', $conditions);
+    $requete = $pdo->prepare("SELECT * FROM personnel" . $sqlConditions);
+    $requete->execute($params);
+    $personnels = $requete->fetchAll();
+} else {
+    $requete = $pdo->prepare("SELECT * FROM personnel");
+    $requete->execute();
+    $personnels = $requete->fetchAll();
+}
+
+// 查询所有团队
+$equipeQuery = $pdo->prepare("SELECT id_equipe, nom_equipe FROM equipe");
+$equipeQuery->execute();
+$equipes = $equipeQuery->fetchAll(PDO::FETCH_ASSOC);
+
+// 查询所有角色
+$roleQuery = $pdo->prepare("SELECT DISTINCT role FROM personnel");
+$roleQuery->execute();
+$roles = $roleQuery->fetchAll(PDO::FETCH_ASSOC);
+
 
 if (isset($_POST['idPersonnel'])){
 
