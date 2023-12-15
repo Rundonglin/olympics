@@ -1,0 +1,8 @@
+.table-hover tbody tr:hover {
+    background-color: #f5f5f5; /* 这里可以设置您希望的颜色 */
+}
+
+.table-container {
+    margin: 0 auto; /* 居中显示 */
+    max-width: 80%; /* 设置最大宽度为页面宽度的 80% */
+}
