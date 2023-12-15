@@ -1,7 +1,8 @@
+
     <main class="container">
         <h1>Equipe
             <h2 class="text-center">Liste de équipe</h2>
-            <table class="table table-success table-striped">
+            <table class="table table-success table-striped table-hover">
                 <tr class="table-dark">
                     <th>ID de équipe</th>
                     <th>Nom de équipe</th>
@@ -29,7 +30,7 @@
                             $agenceUp['id_agence'] 是一个 PHP 变量，用于存储机构的唯一标识符-->
                         
                          <a href="?action=update&id_equipe=<?= $equipe['id_equipe']; ?>">UP</a>
-                         <a href="?action=delete&id_equipe=<?= $equipe['id_equipe']; ?>">Del</a>
+                            <a href="?action=delete&id_equipe=<?= $equipe['id_equipe']; ?>" onclick="return confirmDelete();">Del</a>
                         </td>
                     </tr>
 

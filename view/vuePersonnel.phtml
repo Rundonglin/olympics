@@ -2,7 +2,44 @@
     <main class="container">
         <h1>Personnel
             <h2 class="text-center">Liste de personnel</h2>
-            <table class="table table-success table-striped">
+
+            <!-- 筛选表单 -->
+            <form id="searchForm" action="personnel.php" method="get" class="mb-4">
+                <div class="row g-3">
+                    <!-- 选择国家的下拉菜单 -->
+                    <div class="col">
+                        <select class="form-control" name="nom_equipe">
+                            <option value="">-- Sélectionner le pays --</option>
+                            <?php foreach ($equipes as $equipe): ?>
+                                <option value="<?php echo $equipe['id_equipe']; ?>" <?php echo (isset($_GET['nom_equipe']) && $_GET['nom_equipe'] == $equipe['id_equipe']) ? 'selected' : ''; ?>>
+                                    <?php echo $equipe['nom_equipe']; ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    <!-- 选择角色的下拉菜单 -->
+                    <div class="col">
+                        <select class="form-control" name="role">
+                            <option value="">-- Sélectionner le rôle --</option>
+                            <?php foreach ($roles as $role): ?>
+                                <option value="<?php echo $role['role']; ?>" <?php echo (isset($_GET['role']) && $_GET['role'] == $role['role']) ? 'selected' : ''; ?>>
+                                    <?php echo $role['role']; ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    <div class="col-auto">
+                        <button type="submit" class="btn btn-primary">Chercher</button>
+                    </div>
+                    <!-- 重置按钮 -->
+                    <div class="col-auto">
+                        <button type="button" class="btn btn-secondary" onclick="resetForm();">Réinitialiser</button>
+                    </div>
+                </div>
+            </form>
+
+
+            <table class="table table-success table-striped table-hover">
                 <tr class="table-dark">
                     <th>ID de personnel</th>
                     <th>Prenom</th>
@@ -35,7 +72,7 @@
                             $agenceUp['id_agence'] 是一个 PHP 变量，用于存储机构的唯一标识符-->
                         
                          <a href="?action=update&id_personnel=<?= $personnel['id_personnel']; ?>">UP</a>
-                         <a href="?action=delete&id_personnel=<?= $personnel['id_personnel']; ?>">Del</a>
+                         <a href="?action=delete&id_personnel=<?= $personnel['id_personnel']; ?>" onclick="return confirmDelete();">Del</a>
                         </td>
                     </tr>
 
@@ -43,7 +80,7 @@
 
             </table>
 
-      
+
      <form action="" method="post" class="container">
       <h2>Ajouer une personnel</h2>
           <div>
